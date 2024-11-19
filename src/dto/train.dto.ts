@@ -29,3 +29,35 @@ export class AddTrainDto {
     @IsNotEmpty()
     price: number;
 }
+
+export class UpdateTrainDto {
+
+    @IsDateString()
+    startTime: Date;
+
+    @IsDateString()
+    endTime : Date;
+
+    @IsNumber()
+    totalSeats : number;
+
+    @IsBoolean()
+    isActive : boolean;
+  }
+
+  export class TrainDto {
+
+    trainId: number;
+    
+    name: string;
+
+    source: string;
+
+    destination: string;
+
+    startTime: Date;
+
+    endTime: Date;
+
+    totalSeats: number;
+  }
