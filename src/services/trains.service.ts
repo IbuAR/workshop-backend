@@ -11,7 +11,7 @@ export class TrainsService {
     @Inject('TRAINS_REPOSITORY') private _trainsRepository: typeof Train,
   ) {}
 
-   async getTrains(){    
+  async getTrains() {
     let query = `
             SELECT 
                 t.trainId,
@@ -21,19 +21,21 @@ export class TrainsService {
                 t.startTime,
                 t.endTime,
                 t.totalSeats,
-                t.totalSeats -  COALESCE(SUM(b.SeatCount), 0) AS availableSeats
+                t.price,
+                t.isActive,
+                t.totalSeats - COALESCE(SUM(b.SeatCount), 0) AS availableSeats
             FROM 
                 Trains t
             LEFT JOIN 
                 Bookings b ON t.trainId = b.trainId
-            WHERE 
-                t.isActive = 1 AND t.isDeleted = 0 
+            WHERE t.isDeleted = 0 
             GROUP BY t.trainId
         `;
 
     const data = await this.sequelize.query(query, {
-      type: QueryTypes.SELECT
+      type: QueryTypes.SELECT,
     });
+
     return data;
   }
 
@@ -67,5 +69,4 @@ export class TrainsService {
     });
     return createdTrain.trainId;
   }
-
 }

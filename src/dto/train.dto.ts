@@ -1,63 +1,68 @@
-import { IsBoolean, IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import {
+  IsBoolean,
+  IsDate,
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class AddTrainDto {
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    source: string;
+  @IsString()
+  @IsNotEmpty()
+  source: string;
 
-    @IsString()
-    @IsNotEmpty()
-    destination: string;
+  @IsString()
+  @IsNotEmpty()
+  destination: string;
 
-    @IsDateString()
-    @IsNotEmpty()
-    startTime: Date;
+  @IsDateString()
+  @IsNotEmpty()
+  startTime: Date;
 
-    @IsDateString()
-    @IsNotEmpty()
-    endTime: Date;
+  @IsDateString()
+  @IsNotEmpty()
+  endTime: Date;
 
-    @IsNumber()
-    @IsNotEmpty()
-    totalSeats: number;
+  @IsNumber()
+  @IsNotEmpty()
+  totalSeats: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    price: number;
+  @IsNumber()
+  @IsNotEmpty()
+  price: number;
 }
 
 export class UpdateTrainDto {
+  @IsDateString()
+  startTime: Date;
 
-    @IsDateString()
-    startTime: Date;
+  @IsDateString()
+  endTime: Date;
 
-    @IsDateString()
-    endTime : Date;
+  @IsNumber()
+  totalSeats: number;
 
-    @IsNumber()
-    totalSeats : number;
+  @IsBoolean()
+  isActive: boolean;
+}
 
-    @IsBoolean()
-    isActive : boolean;
-  }
+export class TrainDto {
+  trainId: number;
 
-  export class TrainDto {
+  name: string;
 
-    trainId: number;
-    
-    name: string;
+  source: string;
 
-    source: string;
+  destination: string;
 
-    destination: string;
+  startTime: Date;
 
-    startTime: Date;
+  endTime: Date;
 
-    endTime: Date;
-
-    totalSeats: number;
-  }
+  totalSeats: number;
+}

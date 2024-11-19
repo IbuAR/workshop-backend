@@ -1,4 +1,10 @@
-import {Model, AutoIncrement, Column, PrimaryKey, Table, BelongsTo } from 'sequelize-typescript';
+import {
+  Model,
+  AutoIncrement,
+  Column,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
 
 @Table({ tableName: 'Trains' })
 export class Train extends Model {
@@ -33,5 +39,4 @@ export class Train extends Model {
 
   @Column
   price: number;
-
 }
