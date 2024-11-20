@@ -15,26 +15,25 @@ export class BookingsService {
   async addBooking(request: CreateBookingDto) {
     const booking = await this._bookingsRepository.create({
       userId: request.userId,
-      trainId: request.traindId,
+      trainId: request.trainId,
       bookingDate: new Date(),
       seatCount: request.seatCount,
       isActive: true,
-    })
+    });
 
-    return booking
+    return booking;
   }
-  
 
-  async getBookings(userId: number){
+  async getBookings(userId: number) {
     const bookings = await this._bookingsRepository.findAll({
       where: {
         userId: userId,
         isActive: true,
       },
-      include:[Train]
-    })
+      include: [Train],
+    });
 
-   return bookings.map(booking => {
+    return bookings.map((booking) => {
       return {
         trainId: booking.train.trainId,
         name: booking.train.name,
@@ -43,8 +42,7 @@ export class BookingsService {
         startTime: booking.train.startTime,
         endTime: booking.train.endTime,
         seatCount: booking.seatCount,
-      }
-    })
+      };
+    });
   }
-
 }

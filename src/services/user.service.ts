@@ -63,6 +63,7 @@ export class UserService {
     await this._userRepository.create({
       username: username,
       password: encyrptedPassword,
+      role: 'USER',
     });
 
     const createdUser = await this._userRepository.findOne({

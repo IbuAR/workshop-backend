@@ -1,6 +1,5 @@
 import {
   IsBoolean,
-  IsDate,
   IsDateString,
   IsNotEmpty,
   IsNumber,
@@ -65,4 +64,16 @@ export class TrainDto {
   endTime: Date;
 
   totalSeats: number;
+}
+
+export class SearchTrainDto {
+  @IsNotEmpty()
+  source: string;
+
+  @IsNotEmpty()
+  destination: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  date: string;
 }

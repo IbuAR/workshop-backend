@@ -7,10 +7,11 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AddTrainDto, UpdateTrainDto } from 'src/dto/train.dto';
+import { AddTrainDto, SearchTrainDto, UpdateTrainDto } from 'src/dto/train.dto';
 import { TrainsService } from 'src/services/trains.service';
 
 @Controller('trains')
@@ -30,6 +31,22 @@ export class TrainsController {
   @Get()
   async getTrains() {
     return await this.trainsService.getTrains();
+  }
+
+  @Get('search')
+  async searchTrains(
+    @Query(
+      new ValidationPipe({
+        transform: true,
+      }),
+    )
+    request: SearchTrainDto,
+  ) {
+    return await this.trainsService.searchTrains(
+      request.source,
+      request.destination,
+      request.date,
+    );
   }
 
   @Put(':trainId')

@@ -1,4 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
+import sequelize from 'sequelize';
+import { Op } from 'sequelize';
 import { QueryTypes } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { AddTrainDto, UpdateTrainDto } from 'src/dto/train.dto';
@@ -34,6 +36,20 @@ export class TrainsService {
 
     const data = await this.sequelize.query(query, {
       type: QueryTypes.SELECT,
+    });
+
+    return data;
+  }
+
+  async searchTrains(source: string, destination: string, date: string) {
+    const data = await this._trainsRepository.findAll({
+      where: {
+        source,
+        destination,
+        [Op.and]: [
+          sequelize.where(sequelize.fn('DATE', sequelize.col('endTime')), date),
+        ],
+      },
     });
 
     return data;
