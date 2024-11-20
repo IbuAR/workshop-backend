@@ -40,6 +40,7 @@ export class UserService {
     const accessToken = await this.jwtService.signAsync({
       sub: user.id,
       username: username,
+      role: "ADMIN"
     });
 
     return {
