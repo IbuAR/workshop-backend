@@ -39,8 +39,7 @@ export class UserService {
     // Return a JWT token with the username in the JWT payload
     const accessToken = await this.jwtService.signAsync({
       sub: user.id,
-      username: username,
-      role: "ADMIN"
+      username: username
     });
 
     return {
@@ -64,6 +63,7 @@ export class UserService {
     await this._userRepository.create({
       username: username,
       password: encyrptedPassword,
+      role: "ADMIN"
     });
 
     const createdUser = await this._userRepository.findOne({
