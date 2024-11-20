@@ -39,7 +39,7 @@ export class UserService {
     // Return a JWT token with the username in the JWT payload
     const accessToken = await this.jwtService.signAsync({
       sub: user.id,
-      username: username,
+      username: username
     });
 
     return {
